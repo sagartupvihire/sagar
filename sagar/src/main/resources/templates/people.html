@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/people.css}">
+</head>
+<body>
+   
+    <p>
+        people data
+    </p>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        id
+                    </th>
+                    <th>
+                       name
+                    </th>
+
+                    <th>
+                        mobile
+                    </th>
+                    <th>
+                        E-mail
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th colspan="3">
+                        Year: 2023
+                    </th>
+                </tr>
+            </tfoot>
+            <tbody>
+                <tr th:each="person : ${people}">
+                    <td data-title="Provider Name" th:text="${person.id}"></td>
+                    <td data-title="E-mail" th:text="${person.name}"></td>
+                    <td data-title="E-mail" th:text="${person.mobile}"></td>
+                    <td data-title="E-mail" th:text="${person.email}"></td>
+                    
+                    <td class="select">
+                        <form  th:action="@{'/delete/' + ${person.id}}" method="post">
+                            <button type="submit" class="button">Delete</button>
+                        </form>
+                        <form th:action="@{'/edit/' + ${person.id}}" method="get">
+                            <button type="submit" class="button">Update</button>
+                        </form>
+                    </td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+</html>
