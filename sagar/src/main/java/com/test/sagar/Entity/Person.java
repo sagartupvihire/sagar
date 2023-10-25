@@ -4,8 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Size;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 // import jakarta.validation.constraints.Email;
 import javax.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -23,10 +25,13 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
     private String mobile;
         
-    @Email(message = "Please provide a valid email address")
-    @Pattern(regexp = "^[A-Za-z0-9]+@[A-Za-z]+\\.com$", message = "Please provide a valid email address")
+    @NotEmpty(message = "Email is required")
+    // @Email(message = "Invalid email format")
+    @Pattern(regexp = "^[a-zA-Z0-9._%+-]+@gmail.com$", message = "Invalid Gmail email format")
+    @Size(min = 10,max = 25, message = "invalid Email")
     private String email;
 
     // Constructors, getters, and setters

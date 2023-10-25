@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet"  th:href="@{/css/fomr.css}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function validateEmail(email) {
+            // Regular expression to check email format
+            // var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+			var emailPattern = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            return email.match(emailPattern) !== null;
+        }
+
+		$(document).ready(function() {
+            var $emailInput = $('#email');
+            var $submitButton = $('#submit-button');
+
+            $emailInput.on('input', function() {
+                var email = $emailInput.val();
+                var isValid = validateEmail(email);
+
+                if (isValid) {
+                    $('#email-status').text('Valid email address').css('color', 'green');
+                    $submitButton.prop('disabled', false); // Enable the submit button
+                } else {
+                    $('#email-status').text('Invalid email format').css('color', 'red');
+                    $submitButton.prop('disabled', true); // Disable the submit button
+                }
+            });
+
+            // Disable the submit button initially
+            $submitButton.prop('disabled', true);
+        });
+
+    </script>
 </head>
 <body>
 	
@@ -15,19 +46,28 @@
 	  </div>
 	  <div class="form__right">
 		<div class="form__padding-right">
-		  <form method="post" action="savePerson">
+		  <form method="post" th:action="@{/savePerson}"  th:object="${person}">
 			<h1 class="form__title">Member Login</h1>
-			<input class="form__email" type="text" id="name" name="name" placeholder="name"/>
-			<input class="form__email" type="text" id="mobile" name="mobile" placeholder="mobile"/>
-			<input class="form__email" type="text" id="email" name="email" placeholder="Email"/>
+			<input class="form__email" type="text" id="name" name="name" placeholder="name" required/>
+			<input class="form__email" type="text" id="mobile" name="mobile" placeholder="mobile" required/>
+			<input class="form__email" type="text" id="email" name="email" placeholder="Email" required/>
+			<div id="email-status"></div>
 			<!-- <input class="form__password" id="password" name="password" type="text" placeholder="******"/> -->
-			<input class="form__submit-btn" type="submit" value="Login"/>
-			<span th:if="${emailError}" class="error-message" th:text="${emailError}">error
+			<input class="form__submit-btn submit-button" type="submit" value="Login"/>
+			<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
 			</span>
 			<div id="successMessage" th:if="${message}">
 				<div  th:text="${message}" class="success-message"></div>
 			</div>
 		  </form>
+		  <div class="alert alert-danger" th:if="${#fields.errors()}">
+			<ul>
+				<li th:each="error : ${#fields.errors()}">
+					<span th:text="${error}"></span>
+				</li>
+			</ul>
+		</div>
+		
 		  <span>Forgot<a class="form__link" href="#">Username</a><a>/</a><a class="form__link" href="#">Password</a></span>
 		  <p> <a class="form__link" href="#">Create your account</a></p>
 		</div>
@@ -40,7 +80,14 @@
         if (successMessage) {
             successMessage.style.display = 'none';
         }
-    }, 2000); // 2000 milliseconds (2 seconds)
+    }, 2000);
+	
+	setTimeout(function() {
+        var successMessage = document.getElementById('successMessage');
+        if (successMessage) {
+            successMessage.style.display = 'none';
+        }
+    }, 2000);// 2000 milliseconds (2 seconds)
 </script>
 </body>
 </html>
