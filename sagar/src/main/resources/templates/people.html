@@ -11,6 +11,11 @@
     <p>
         people data
     </p>
+    <form th:action="@{'/search'}" method="get">
+        <label for="searchQuery">Search:</label>
+        <input type="text" id="searchQuery" name="query">
+        <button type="submit" class="button">Search</button>
+    </form>
     <main>
         <table>
             <thead>
@@ -28,7 +33,10 @@
                     <th>
                         E-mail
                     </th>
-                    <th></th>
+                    <th>
+                        Internship
+                    </th>
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tfoot>
@@ -44,10 +52,11 @@
                     <td data-title="E-mail" th:text="${person.name}"></td>
                     <td data-title="E-mail" th:text="${person.mobile}"></td>
                     <td data-title="E-mail" th:text="${person.email}"></td>
+                    <td data-title="E-mail" th:text="${person.internship}"></td>
                     
                     <td class="select">
                         <form  th:action="@{'/delete/' + ${person.id}}" method="post">
-                            <button type="submit" class="button">Delete</button>
+                            <button type="submit" class="buttonRed">Delete</button>
                         </form>
                         <form th:action="@{'/edit/' + ${person.id}}" method="get">
                             <button type="submit" class="button">Update</button>

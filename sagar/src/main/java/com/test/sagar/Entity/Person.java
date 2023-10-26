@@ -27,6 +27,7 @@ public class Person {
     private String name;
 
     private String mobile;
+    private String internship;
         
     @NotEmpty(message = "Email is required")
     // @Email(message = "Invalid email format")
@@ -34,5 +35,4 @@ public class Person {
     @Size(min = 10,max = 25, message = "invalid Email")
     private String email;
 
-    // Constructors, getters, and setters
 }

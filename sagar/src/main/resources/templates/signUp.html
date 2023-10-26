@@ -15,15 +15,15 @@
 	  </div>
 	  <div class="form__right">
 		<div class="form__padding-right">
-		  <form method="post" action="admin/login">
+		  <form method="post" action="admin/login"  >
 			<h1 class="form__title">Member Login</h1>
 			<input class="form__email" type="email" id="username" name="username" placeholder="Email"/>
 			<input class="form__password" id="password" name="password" type="text" placeholder="******"/>
 			<!-- <button class="form__submit-btn" type="submit">login</button> -->
 			<input class="form__submit-btn" type="submit" value="Login"/>
 
-			<span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-			>
+			<!-- <span class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+			 -->
               
 		  </form>
 		  <span>Forgot<a class="form__link" href="#">Username</a><a>/</a><a class="form__link" href="#">Password</a></span>

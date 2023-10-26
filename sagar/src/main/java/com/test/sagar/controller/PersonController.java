@@ -1,5 +1,6 @@
 package com.test.sagar.controller;
 
+import javax.management.StringValueExp;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,15 +38,13 @@ public class PersonController {
             return "addData"; // Return to the form with validation errors
         }
 
-        
-        System.out.println("saving");
-      
         personRepository.save(person);
         model.addAttribute("message", "Data saved successfully!"); 
 
         // return "redirect:/error";
         return "addData";
     }
+
 
     
 }

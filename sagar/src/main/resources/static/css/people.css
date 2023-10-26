@@ -99,6 +99,19 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .buttonRed{
+    line-height: 1;
+    display: inline-block;
+    font-size: 1.2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    color: #fff;
+    padding: 8px;
+    background-color: #ed3d51;
+    display: flex;
+    justify-content: space-between;
+  }
   
   .button-container {
     display: flex;
